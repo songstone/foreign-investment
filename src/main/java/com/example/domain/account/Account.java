@@ -1,5 +1,6 @@
 package com.example.domain.account;
 
+import com.example.domain.BaseTimeEntity;
 import com.example.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +16,7 @@ import java.math.BigDecimal;
 @Builder
 @Entity
 @TableGenerator(name = "ACCOUNT_NUM_GENERATOR")
-public class Account {
+public class Account extends BaseTimeEntity {
 
     @Id
     @GeneratedValue

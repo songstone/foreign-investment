@@ -1,5 +1,7 @@
 package com.example.domain.transfer;
 
+import com.example.constant.TransferType;
+import com.example.domain.BaseTimeEntity;
 import com.example.domain.account.Account;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,14 +10,13 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-public class Transfer {
+public class Transfer extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +26,8 @@ public class Transfer {
     @JoinColumn(name = "ACCOUNT_ID")
     private Account account;
 
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private TransferType type;
 
     private BigDecimal money;
 

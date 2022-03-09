@@ -1,5 +1,7 @@
 package com.example.domain.investment;
 
+import com.example.constant.InvestmentStatus;
+import com.example.domain.BaseTimeEntity;
 import com.example.domain.product.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,14 +10,13 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-public class Investment {
+public class Investment extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,7 +27,6 @@ public class Investment {
 
     private BigDecimal investedAmount;
 
-    private String status;
-
-    private LocalDateTime investedAt;
+    @Enumerated(EnumType.STRING)
+    private InvestmentStatus status;
 }

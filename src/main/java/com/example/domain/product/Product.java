@@ -1,5 +1,6 @@
 package com.example.domain.product;
 
+import com.example.domain.BaseTimeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,7 +18,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 @Entity
-public class Product {
+public class Product extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
