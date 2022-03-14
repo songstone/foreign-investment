@@ -29,7 +29,7 @@ public enum UnitCode {
     SEK("스웨덴","크로나"),
     SGD("싱가포르","달러"),
     THB("태국","바트"),
-    USB("미국","달러")
+    USD("미국","달러")
     ;
 
     private final String country;
