@@ -1,15 +1,13 @@
 package com.example.domain.product;
 
+import com.example.constant.UnitCode;
 import com.example.domain.BaseTimeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -32,7 +30,8 @@ public class Product extends BaseTimeEntity {
 
     private Long investedCount;
 
-    private String country;
+    @Enumerated(EnumType.STRING)
+    private UnitCode unitCode;
 
     private LocalDate startAt;
 
