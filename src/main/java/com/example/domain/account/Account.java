@@ -36,7 +36,17 @@ public class Account extends BaseTimeEntity {
     }
 
     public Long withdraw(BigDecimal money) {
+        checkBalance(money);
         this.balance = this.balance.subtract(money);
         return this.accountNum;
+    }
+
+    private boolean checkBalance(BigDecimal money) {
+        if(this.balance.compareTo(money) >= 0) {
+            return true;
+        }
+        else {
+            throw new IllegalArgumentException("NOT_ENOUGH_BALANCE");
+        }
     }
 }
