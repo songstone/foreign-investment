@@ -36,4 +36,20 @@ public class Product extends BaseTimeEntity {
     private LocalDate startAt;
 
     private LocalDate finishAt;
+
+    public Long updateProductAfterInvestment(BigDecimal money) {
+        checkTotalInvestingAmount(money);
+        this.investedAmount = this.investedAmount.add(money);
+        this.investedCount = this.investedCount + 1 ;
+        return this.id;
+    }
+
+    private boolean checkTotalInvestingAmount(BigDecimal money) {
+        if(getTotalInvestingAmount().subtract(getInvestedAmount()).compareTo(money) >= 0) {
+            return true;
+        }
+        else {
+            throw new IllegalArgumentException("NOT_ENOUGH_AMOUNT");
+        }
+    }
 }
