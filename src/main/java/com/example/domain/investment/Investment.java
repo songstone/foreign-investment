@@ -1,6 +1,7 @@
 package com.example.domain.investment;
 
 import com.example.constant.InvestmentStatus;
+import com.example.constant.UnitCode;
 import com.example.domain.BaseTimeEntity;
 import com.example.domain.product.Product;
 import com.example.domain.user.User;
@@ -31,6 +32,9 @@ public class Investment extends BaseTimeEntity {
     private Product product;
 
     private BigDecimal investedAmount;
+
+    @Enumerated(EnumType.STRING)
+    private UnitCode unitCode;
 
     @Enumerated(EnumType.STRING)
     private InvestmentStatus status;
