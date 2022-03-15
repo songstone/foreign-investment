@@ -34,4 +34,9 @@ public class Account extends BaseTimeEntity {
         this.balance = this.balance.add(money);
         return this.accountNum;
     }
+
+    public Long withdraw(BigDecimal money) {
+        this.balance = this.balance.subtract(money);
+        return this.accountNum;
+    }
 }

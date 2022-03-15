@@ -33,7 +33,12 @@ public class BankService {
     }
 
     @Transactional
-    public Long deposit(Account account ,BigDecimal money) {
+    public Long deposit(Account account , BigDecimal money) {
         return account.deposit(money);
+    }
+
+    @Transactional
+    public Long withdraw(Account account, BigDecimal money) {
+        return account.withdraw(money);
     }
 }
