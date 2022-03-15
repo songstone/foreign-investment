@@ -6,6 +6,8 @@ import com.example.domain.investment.Investment;
 import com.example.domain.investment.InvestmentRepository;
 import com.example.domain.product.Product;
 import com.example.domain.product.ProductRepository;
+import com.example.domain.user.User;
+import com.example.domain.user.UserRepository;
 import com.example.utils.ExchangeRateCalculator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,14 @@ public class InvestmentService {
     private final InvestmentRepository investmentRepository;
     private final AccountRepository accountRepository;
     private final ProductRepository productRepository;
+
+    public List<Investment> getInvestmentList(){
+        return investmentRepository.findAll();
+    }
+
+    public List<Investment> getInvestmentList(User user) {
+        return investmentRepository.findAllByUser(user);
+    }
 
     @Transactional
     public Long investment(Long accountNum, BigDecimal money, Long productId) {
