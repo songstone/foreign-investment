@@ -10,5 +10,5 @@ public enum TransferType {
     DEPOSIT("입금")
     ;
 
-    private final String descrption;
+    private final String description;
 }
