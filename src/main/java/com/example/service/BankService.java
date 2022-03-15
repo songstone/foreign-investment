@@ -5,6 +5,7 @@ import com.example.domain.account.AccountRepository;
 import com.example.domain.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
@@ -14,6 +15,7 @@ public class BankService {
 
     private final AccountRepository accountRepository;
 
+    @Transactional
     public Long registerAccount(User user, String password) {
         Account account = Account.builder()
                 .user(user)
@@ -28,5 +30,10 @@ public class BankService {
                 () -> new IllegalArgumentException("NOT_INVALID_ACCOUNT")
         );
         return account;
+    }
+
+    @Transactional
+    public Long deposit(Account account ,BigDecimal money) {
+        return account.deposit(money);
     }
 }

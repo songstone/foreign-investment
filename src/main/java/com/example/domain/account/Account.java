@@ -29,4 +29,9 @@ public class Account extends BaseTimeEntity {
     private String password;
 
     private BigDecimal balance;
+
+    public Long deposit(BigDecimal money) {
+        this.balance = this.balance.add(money);
+        return this.accountNum;
+    }
 }
