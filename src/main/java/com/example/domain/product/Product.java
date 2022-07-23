@@ -37,10 +37,16 @@ public class Product extends BaseTimeEntity {
 
     private LocalDate finishAt;
 
-    public Long updateProductAfterInvestment(BigDecimal money) {
+    public Long updateProductInvestment(BigDecimal money) {
         checkTotalInvestingAmount(money);
         this.investedAmount = this.investedAmount.add(money);
-        this.investedCount = this.investedCount + 1 ;
+        this.investedCount = this.investedCount + 1;
+        return this.id;
+    }
+
+    public Long updateProductCancel(BigDecimal money) {
+        this.investedAmount = this.investedAmount.subtract(money);
+        this.investedCount = this.investedCount - 1;
         return this.id;
     }
 

@@ -38,4 +38,8 @@ public class Investment extends BaseTimeEntity {
 
     @Enumerated(EnumType.STRING)
     private InvestmentStatus status;
+
+    public void cancel() {
+        this.status = InvestmentStatus.CANCELED;
+    }
 }
