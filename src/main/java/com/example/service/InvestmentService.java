@@ -7,7 +7,6 @@ import com.example.domain.investment.InvestmentRepository;
 import com.example.domain.product.Product;
 import com.example.domain.product.ProductRepository;
 import com.example.domain.user.User;
-import com.example.domain.user.UserRepository;
 import com.example.utils.ExchangeRateCalculator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -59,8 +58,29 @@ public class InvestmentService {
                 .unitCode(product.getUnitCode())
                 .status(INVESTING)
                 .build();
-        product.updateProductAfterInvestment(money);
+        product.updateProductInvestment(money);
 
         return investmentRepository.save(investment).getId();
+    }
+
+    @Transactional
+    public Long cancel(Long investmentId, Long accountNum) {
+        Investment investment = investmentRepository.findById(investmentId).orElseThrow(
+                () -> new IllegalArgumentException("INVESTMENT_NOT_FOUND")
+        );
+        Account account = accountRepository.findById(accountNum).orElseThrow(
+                () -> new IllegalArgumentException("ACCOUNT_NOT_FOUND")
+        );
+        Product product = investment.getProduct();
+        BigDecimal money = investment.getInvestedAmount();
+        product.updateProductCancel(money);
+
+        if (!product.getUnitCode().equals(KRW)) {
+            BigDecimal exchangeRate = calculator.exchangeUnitForGet(product.getUnitCode());
+            money = money.divide(exchangeRate, 2, RoundingMode.HALF_EVEN);
+        }
+        account.deposit(money);
+        investment.cancel();
+        return investment.getId();
     }
 }

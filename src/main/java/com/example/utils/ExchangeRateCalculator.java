@@ -31,7 +31,7 @@ public class ExchangeRateCalculator {
         ExchangeRateData[] result = restTemplate.getForObject(url, ExchangeRateData[].class);
         for (ExchangeRateData unit : result) {
             if (unit.getCur_unit().substring(0, 3).equals(unitCode.name())) {
-                return new BigDecimal(Long.parseLong(unit.getTtb().replaceAll(",", "")));
+                return new BigDecimal(unit.getTtb().replaceAll(",", ""));
             }
         }
         throw new IllegalArgumentException("COUNTRY_NOT_FOUND");
